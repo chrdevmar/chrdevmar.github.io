@@ -1,0 +1,26 @@
+{
+  "name": "chrdevmar.github.io",
+  "version": "1.0.0",
+  "description": "Personal website for chris martin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "postexport": "node generateSiteMap.js",
+    "deploy": "npm run build && npm run export && aws s3 sync ./out s3://cmartin.co/ && npm run invalidate-cloudfront",
+    "invalidate-cloudfront": "aws cloudfront create-invalidation --distribution-id E1L13TVF7G7NI0 --paths '/*'"
+  },
+  "author": "Chris Martin",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "serve": "^11.0.2"
+  }
+}
